@@ -1,0 +1,82 @@
+{
+  "name": "pv",
+  "about": "The 10 second rsepuh PV, cut to a 120 BPM beat grid. Built by `rsepuh pv`: Blender seal, Gemini still, Gemini voice, handcrafted music and sfx, EffectCraft motion.",
+  "aspect": "9:16",
+  "fps": 30,
+  "style": "punch",
+  "bpm": 120,
+  "voice": {
+    "engine": "gemini",
+    "voice": "Puck",
+    "lang": "en-US",
+    "style": "confident, punchy"
+  },
+  "subtitles": {
+    "style": "karaoke",
+    "y": 0.82
+  },
+  "music": {
+    "gen": "house",
+    "gainDb": -9,
+    "duckDb": -7
+  },
+  "watermark": "github.com/igun997/rsepuh",
+  "scenes": [
+    {
+      "type": "hook",
+      "dur": 2.0,
+      "words": [
+        "EDIT",
+        "LIKE",
+        "A VETERAN"
+      ],
+      "sub": "Edit layaknya sepuh",
+      "voice": "Edit like a veteran.",
+      "voiceStyle": "confident, punchy, quick",
+      "subtitle": false
+    },
+    {
+      "type": "media",
+      "dur": 3.0,
+      "transition": "wipe",
+      "src": "assets/gen/pv-bg.png",
+      "overlay": "assets/3d/seal/seal_####.png",
+      "overlaySize": 0.8,
+      "overlayY": 0.36,
+      "caption": "Motion + 3D + stills",
+      "captionY": 0.7,
+      "voice": "Motion, 3D, and stills. One command.",
+      "voiceStyle": "bright, energetic, quick pace"
+    },
+    {
+      "type": "chips",
+      "dur": 3.0,
+      "transition": "flash",
+      "title": "One pipeline",
+      "items": [
+        "EffectCraft",
+        "Blender",
+        "Gemini"
+      ],
+      "sub": "handcrafted, never generated video",
+      "voice": "EffectCraft. Blender. Gemini.",
+      "voiceStyle": "excited, rhythmic, rising pitch"
+    },
+    {
+      "type": "cta",
+      "dur": 2.0,
+      "transition": "accent",
+      "caps": false,
+      "title": "rsepuh",
+      "lines": [
+        "Edit layaknya sepuh"
+      ],
+      "button": "Try it free",
+      "url": "github.com/igun997/rsepuh",
+      "voice": "Edit layaknya sepuh.",
+      "voiceLang": "id-ID",
+      "voiceStyle": "warm, proud, slow, falling pitch",
+      "subtitle": false
+    }
+  ]
+}

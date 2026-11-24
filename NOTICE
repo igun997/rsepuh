@@ -1,0 +1,11 @@
+rsepuh is MIT licensed (see LICENSE).
+
+rsepuh does not bundle third-party programs. It downloads and runs them on the remote sandbox:
+- EffectCraft (https://github.com/storytold/effectcraft), MIT OR Apache-2.0, installed from its GitHub
+  release with the published SHA-256 checksum verified.
+- Blender (https://www.blender.org), GPL, installed by rblender from download.blender.org.
+- edge-tts (https://github.com/rany2/edge-tts), run through `uv` for the optional free voice. It uses
+  Microsoft's online read-aloud service; check its terms for your use.
+- Google Gemini API, optional, with your own key.
+
+Bundled fonts used by the default themes (Inter, JetBrains Mono) ship inside EffectCraft under their own open licences.

@@ -1,0 +1,10 @@
+{
+  "name": "smooth",
+  "about": "Soft slide-up reveals on warm paper with ink text. Calm explainer and lifestyle look.",
+  "bg": "#f6f0e6", "bg2": "#efe4d2",
+  "fg": "#1c1a17", "muted": "#6d655a", "accent": "#e4572e", "accent2": "#2e86ab", "onAccent": "#ffffff", "panel": "#1c1a17",
+  "font": "Inter-Bold", "mono": "JetBrainsMono-Regular",
+  "caps": false, "tracking": -4, "stroke": "", "strokeW": 0,
+  "motion": "slide", "pop": 1.04, "popDur": 0.45, "stagger": 0.18, "shake": 0, "tilt": 0,
+  "transition": "cut", "motionBlur": false, "grain": 0
+}

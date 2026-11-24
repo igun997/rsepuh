@@ -1,0 +1,28 @@
+[package]
+name = "rsepuh"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.82"
+description = "Edit layaknya sepuh: UGC-style motion videos with EffectCraft, Blender and Gemini assets, rendered on remote sandboxes (Daytona, instabox, SSH)"
+license = "MIT"
+repository = "https://github.com/igun997/rsepuh"
+readme = "README.md"
+keywords = ["video", "motion-graphics", "effectcraft", "blender", "ugc"]
+categories = ["command-line-utilities", "multimedia::video"]
+exclude = ["renders/", "target/", "proof/"]
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "rsepuh"
+path = "src/main.rs"
+
+[dependencies]
+flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
+png = "0.17"
+serde_json = { version = "1", features = ["preserve_order"] }
+
+[profile.release]
+lto = "thin"
+strip = true

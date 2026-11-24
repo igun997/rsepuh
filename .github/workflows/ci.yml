@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    name: test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - uses: Swatinem/rust-cache@v2
+      - name: fmt
+        run: cargo fmt --all -- --check
+      - name: clippy
+        run: cargo clippy --all-targets -- -D warnings
+      - name: unit tests
+        run: cargo test --all-targets
+      - name: CLI smoke test
+        run: |
+          cargo build --release
+          ./target/release/rsepuh --version
+          ./target/release/rsepuh help | grep -q "Edit layaknya sepuh"
+          ./target/release/rsepuh styles | grep -q karaoke
+          if ./target/release/rsepuh gen video "x" ; then echo "gen video must be refused"; exit 1; fi
+
+  # Real EffectCraft, real render: the same steps the sandbox runs. Write the plan, run the Python motion
+  # writer, import the Lottie into EffectCraft, compose, render, then prove the MP4.
+  render-e2e:
+    name: lottie + effectcraft render e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: build rsepuh
+        run: cargo build --release
+      - name: install EffectCraft (same script the sandbox bootstrap uses)
+        run: bash scripts/install-effectcraft.sh
+      - name: write, import, compose and render the starter spec
+        run: |
+          set -euo pipefail
+          R="$GITHUB_WORKSPACE/target/release/rsepuh"
+          EC="$HOME/effectcraft/bin/effectcraft-cli"
+          mkdir -p /tmp/proj/scenes && cd /tmp/proj
+          printf '[package]\nname="proj"\nversion="0.1.0"\nedition="2021"\n[lib]\npath="src/lib.rs"\n' > Cargo.toml
+          mkdir src && touch src/lib.rs
+          cp -r "$GITHUB_WORKSPACE/lottie" lottie
+          "$R" new hello --style punch
+          "$R" build hello --plan --out plan.json
+          "$R" build hello --out hello.jsx
+          sed -i "s#__ROOT__#$PWD#g" plan.json hello.jsx
+          python3 lottie/writer.py plan.json renders/hello/lottie
+          args=(); for f in renders/hello/lottie/scene-*.json; do args+=(file.importLottie "{\"path\":\"$PWD/$f\"}"); done
+          "$EC" --empty --save-as renders/hello/base.ecproj run "${args[@]}" > /dev/null
+          "$EC" --project renders/hello/base.ecproj --save-as renders/hello/hello.ecproj script hello.jsx
+          "$EC" --project renders/hello/hello.ecproj render --comp Main --out renders/hello/hello.mp4 --format h264 --bitrate 3000 --resolution half
+          "$R" verify renders/hello/hello.mp4
+          "$R" check renders/hello/hello.mp4 --platform tiktok || true

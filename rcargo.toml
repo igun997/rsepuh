@@ -1,0 +1,10 @@
+# rcargo project settings. rsepuh runs EffectCraft and Blender on a remote sandbox through rcargo.
+# instabox is recommended (full internet, so Blender installs too):
+#   rcargo instances add main --backend instabox --default
+instance = "main"
+
+[sync]
+exclude = []
+
+[remote]
+forward_env = []

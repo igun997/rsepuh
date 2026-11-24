@@ -1,0 +1,10 @@
+{
+  "name": "clean",
+  "about": "Bright white, one blue accent, quick pops without shake. Product and SaaS demo look.",
+  "bg": "#ffffff", "bg2": "#eef3ff",
+  "fg": "#0f172a", "muted": "#64748b", "accent": "#2563eb", "accent2": "#f97316", "onAccent": "#ffffff", "panel": "#0f172a",
+  "font": "Inter-Bold", "mono": "JetBrainsMono-Regular",
+  "caps": false, "tracking": -6, "stroke": "", "strokeW": 0,
+  "motion": "pop", "pop": 1.08, "popDur": 0.32, "stagger": 0.14, "shake": 0, "tilt": 0,
+  "transition": "cut", "motionBlur": false, "grain": 0
+}

@@ -1,0 +1,285 @@
+{
+  "name": "useeffect",
+  "about": "What useEffect actually does, told as a story. 9:16, 90 BPM lofi bed, Gemini voice, custom code/diagram/pipeline scenes.",
+  "aspect": "9:16",
+  "fps": 30,
+  "style": "devnight",
+  "bpm": 90,
+  "voice": {
+    "engine": "gemini",
+    "voice": "Charon",
+    "lang": "en-US",
+    "style": "clear, engaging, conversational"
+  },
+  "subtitles": {
+    "style": "box",
+    "y": 0.84,
+    "size": 64
+  },
+  "music": {
+    "gen": "lofi",
+    "gainDb": -12,
+    "duckDb": -8
+  },
+  "watermark": "made with rsepuh",
+  "scenes": [
+    {
+      "type": "hook",
+      "dur": 3,
+      "words": [
+        "useEffect",
+        "is not",
+        "a lifecycle",
+        "method."
+      ],
+      "voice": "useEffect is not a lifecycle method.",
+      "voiceStyle": "direct, confident, a beat of tension",
+      "subtitle": false,
+      "onWords": {
+        "wordT": [
+          "useEffect",
+          "not",
+          "lifecycle",
+          "method"
+        ]
+      }
+    },
+    {
+      "type": "chips",
+      "dur": 6,
+      "title": "What most of us learned",
+      "items": [
+        "componentDidMount",
+        "componentDidUpdate",
+        "componentWillUnmount"
+      ],
+      "sub": "three class methods, one hook?",
+      "voice": "Most of us learned it as three class methods: mount, update, unmount. That model gets you far, until it quietly breaks.",
+      "voiceStyle": "conversational, slightly knowing",
+      "onWords": {
+        "itemT": [
+          "mount",
+          "update",
+          "unmount"
+        ]
+      }
+    },
+    {
+      "type": "title",
+      "dur": 4,
+      "lines": [
+        "It synchronizes",
+        "React with",
+        "the outside world"
+      ],
+      "voice": "What it really does is synchronize your component with something outside of React.",
+      "voiceStyle": "warm, clear, emphasis on synchronize"
+    },
+    {
+      "type": "custom",
+      "file": "lottie/scenes/diagram.py",
+      "dur": 9,
+      "top": {
+        "title": "React",
+        "items": [
+          "state",
+          "props",
+          "JSX"
+        ],
+        "note": "describes the screen"
+      },
+      "bottom": {
+        "title": "Outside world",
+        "items": [
+          "page title",
+          "network",
+          "timers",
+          "subscriptions"
+        ],
+        "note": "React cannot see or control it"
+      },
+      "bridge": "useEffect",
+      "voice": "React owns the screen. The outside world, the title, the network, timers, it cannot control. An effect is the bridge between them.",
+      "voiceStyle": "storytelling, steady pace",
+      "onWord": {
+        "topBeat": "React",
+        "bottomBeat": "outside",
+        "arrowBeat": "bridge"
+      }
+    },
+    {
+      "type": "custom",
+      "file": "lottie/scenes/pipeline.py",
+      "dur": 8,
+      "title": "What happens on every state change",
+      "steps": [
+        {
+          "title": "Render",
+          "sub": "React calls your component"
+        },
+        {
+          "title": "Commit",
+          "sub": "React updates the DOM"
+        },
+        {
+          "title": "Paint",
+          "sub": "the browser draws the screen"
+        },
+        {
+          "title": "Effect",
+          "sub": "now your effect runs"
+        }
+      ],
+      "voice": "The order matters. React renders, calling your component. It commits changes to the DOM. The browser paints. Only then does your effect run.",
+      "voiceStyle": "storytelling, building anticipation, rising",
+      "onWords": {
+        "stepBeats": [
+          "renders",
+          "commits",
+          "paints",
+          "effect"
+        ]
+      },
+      "transition": "wipe"
+    },
+    {
+      "type": "code",
+      "dur": 8,
+      "file_name": "Title.jsx",
+      "code": [
+        "useEffect(() => {",
+        "  document.title = `Count: ${count}`;",
+        "}, [count]);"
+      ],
+      "startBeat": 0,
+      "lineBeats": 0.75,
+      "focus": [
+        {
+          "line": 1,
+          "atWord": "title",
+          "untilWord": "changes",
+          "label": "syncs the tab title"
+        },
+        {
+          "line": 2,
+          "atWord": "bracket",
+          "untilWord": "array",
+          "label": "the dependency array"
+        }
+      ],
+      "voice": "Say the tab title should follow a counter. The effect runs after render, only when count changes. That bracket list is the dependency array.",
+      "voiceStyle": "friendly, explaining"
+    },
+    {
+      "type": "chips",
+      "dur": 6,
+      "title": "The dependency array",
+      "items": [
+        "no array: every render",
+        "[ ]: once",
+        "[a, b]: on change"
+      ],
+      "voice": "No array, it runs after every render. An empty array, once. With values, only when one of them changes.",
+      "voiceStyle": "crisp, rhythmic",
+      "onWords": {
+        "itemT": [
+          "no",
+          "empty",
+          "values"
+        ]
+      }
+    },
+    {
+      "type": "code",
+      "dur": 9,
+      "file_name": "Timer.jsx",
+      "code": [
+        "useEffect(() => {",
+        "  const id = setInterval(tick, 1000);",
+        "  return () => clearInterval(id);",
+        "}, []);"
+      ],
+      "startBeat": 0,
+      "lineBeats": 0.75,
+      "focus": [
+        {
+          "line": 2,
+          "atWord": "return",
+          "untilWord": "stops",
+          "label": "cleanup: stop what you started"
+        }
+      ],
+      "voice": "If an effect starts something, return a function that stops it. React runs that cleanup before the next effect, and when the component unmounts.",
+      "voiceStyle": "serious, careful, steady"
+    },
+    {
+      "type": "chips",
+      "dur": 8,
+      "title": "Three classic traps",
+      "items": [
+        "Infinite loops",
+        "Stale values",
+        "Fetch races"
+      ],
+      "sub": "a missing dependency, or a missing cleanup",
+      "voice": "Three classic traps. Setting state in an effect with no dependencies loops forever. A dependency list that lies gives you stale values. And fetching without cleanup lets a slow response land late.",
+      "voiceStyle": "warning tone, brisk",
+      "onWords": {
+        "itemT": [
+          "loops",
+          "stale",
+          "fetching"
+        ]
+      },
+      "transition": "flash"
+    },
+    {
+      "type": "title",
+      "dur": 6,
+      "lines": [
+        "You might",
+        "not need",
+        "an effect"
+      ],
+      "voice": "And often, you don't need one at all. If you can calculate it while rendering, or handle it in an event handler, do that instead.",
+      "voiceStyle": "calm, wise, slowing down"
+    },
+    {
+      "type": "hook",
+      "dur": 3,
+      "words": [
+        "Effects",
+        "synchronize.",
+        "They don't",
+        "track lifecycle."
+      ],
+      "voice": "Effects synchronize. They don't track lifecycle.",
+      "voiceStyle": "emphatic, slow, falling at the end",
+      "subtitle": false,
+      "onWords": {
+        "wordT": [
+          "Effects",
+          "synchronize",
+          "They",
+          "track"
+        ]
+      },
+      "transition": "accent"
+    },
+    {
+      "type": "cta",
+      "dur": 3,
+      "caps": false,
+      "title": "rsepuh",
+      "lines": [
+        "Edit layaknya sepuh"
+      ],
+      "button": "Make yours",
+      "url": "github.com/igun997/rsepuh",
+      "voice": "Edit layaknya sepuh.",
+      "voiceStyle": "warm, proud, slow",
+      "subtitle": false,
+      "voiceLang": "id-ID"
+    }
+  ]
+}

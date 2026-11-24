@@ -1,0 +1,7 @@
+/target
+/renders
+/out
+/.env
+.rsepuh/
+__pycache__/
+*.pyc

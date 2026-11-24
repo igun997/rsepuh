@@ -1,0 +1,10 @@
+{
+  "name": "neon",
+  "about": "Night-club palette: deep violet, cyan and magenta accents, tilted chips, strong pops.",
+  "bg": "#0a0620", "bg2": "#2a0f4d",
+  "fg": "#f4f1ff", "muted": "#a99ddb", "accent": "#00e5ff", "accent2": "#ff2bd6", "onAccent": "#0a0620", "panel": "#120a33",
+  "font": "Inter-Bold", "mono": "JetBrainsMono-Regular",
+  "caps": true, "tracking": 0, "stroke": "#0a0620", "strokeW": 8,
+  "motion": "pop", "pop": 1.22, "popDur": 0.3, "stagger": 0.1, "shake": 10, "tilt": 5,
+  "transition": "accent", "motionBlur": false, "grain": 0.04
+}

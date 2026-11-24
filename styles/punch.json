@@ -1,0 +1,10 @@
+{
+  "name": "punch",
+  "about": "Hard pop-ins, screen shake and flash cuts on black with a yellow accent. The default TikTok/Reels hook look.",
+  "bg": "#0b0b10", "bg2": "#1a1330",
+  "fg": "#ffffff", "muted": "#b9b6c9", "accent": "#ffd400", "accent2": "#ff3b6b", "onAccent": "#0b0b10", "panel": "#14141c",
+  "font": "Inter-Bold", "mono": "JetBrainsMono-Regular",
+  "caps": true, "tracking": -10, "stroke": "#000000", "strokeW": 10,
+  "motion": "pop", "pop": 1.18, "popDur": 0.28, "stagger": 0.12, "shake": 16, "tilt": 3,
+  "transition": "flash", "motionBlur": false, "grain": 0.06
+}
